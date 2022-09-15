@@ -51,13 +51,6 @@ class _HomepageState extends State<Homepage> {
     );
     _assetsAudioPlayer.play();
     _assetsAudioPlayer.setLoopMode(LoopMode.single);
-
-    timer2 = Timer.periodic(
-      const Duration(seconds: 1),
-      (timer) {
-        Play ? skyleftmovement() : null;
-      },
-    );
   }
 
   @override
@@ -128,6 +121,21 @@ class _HomepageState extends State<Homepage> {
       currentmario = standingmario;
     });
     startime();
+    startcloudmoment();
+  }
+
+  void endplaymoment() {
+    timer?.cancel();
+    timer2?.cancel();
+  }
+
+  void startcloudmoment() {
+    timer2 = Timer.periodic(
+      const Duration(seconds: 1),
+      (timer) {
+        skyleftmovement();
+      },
+    );
   }
 
   void startime() {
@@ -169,16 +177,18 @@ class _HomepageState extends State<Homepage> {
   }
 
   void jump() async {
-    setState(() {
-      YMarioAxis -= 0.5;
-      currentmario = runningmario;
-    });
+    if (YMarioAxis > -1) {
+      setState(() {
+        YMarioAxis -= 0.5;
+        currentmario = runningmario;
+      });
 
-    await Future.delayed(const Duration(milliseconds: 600));
-    setState(() {
-      YMarioAxis += 0.5;
-      currentmario = standingmario;
-    });
+      await Future.delayed(const Duration(milliseconds: 600));
+      setState(() {
+        YMarioAxis += 0.5;
+        currentmario = standingmario;
+      });
+    }
   }
 
   @override
@@ -219,6 +229,18 @@ class _HomepageState extends State<Homepage> {
                                 ),
                               )
                             : Container(),
+                        AnimatedContainer(
+                          duration: const Duration(milliseconds: 300),
+                          alignment: const Alignment(0, 1.06),
+                          child: Image.asset("assets/images/box.png",
+                              scale: MediaQuery.of(context).size.width * 0.005),
+                        ),
+                        AnimatedContainer(
+                          duration: const Duration(milliseconds: 300),
+                          alignment: const Alignment(0.2, -0.1),
+                          child: Image.asset("assets/images/gif/giftbox.gif",
+                              scale: MediaQuery.of(context).size.width * 0.005),
+                        ),
                         AnimatedContainer(
                           duration: const Duration(milliseconds: 300),
                           alignment: Alignment(XMarioAxis, YMarioAxis),
@@ -333,6 +355,7 @@ class _HomepageState extends State<Homepage> {
                               onTap: () {
                                 setState(() {
                                   Play = false;
+                                  endplaymoment();
                                 });
                               },
                               child: Container(
