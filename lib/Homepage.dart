@@ -20,6 +20,9 @@ class _HomepageState extends State<Homepage> {
   double cloud2YAxis = -0.8;
   bool Play = false;
   bool options = false;
+  bool clouds = true;
+  bool Birds = true;
+  bool Music = true;
   String standingmario = "assets/images/movement/standing mario.png";
   String runningmario = "assets/images/movement/mario running.png";
   String ruuning2mario = "assets/images/movement/mario start running.png";
@@ -43,6 +46,7 @@ class _HomepageState extends State<Homepage> {
       volume: Volume,
     );
     _assetsAudioPlayer.play();
+    _assetsAudioPlayer.setLoopMode(LoopMode.single);
 
     timer2 = Timer.periodic(
       const Duration(seconds: 1),
@@ -189,22 +193,28 @@ class _HomepageState extends State<Homepage> {
                     width: double.infinity,
                     child: Stack(
                       children: [
-                        AnimatedContainer(
-                          duration: const Duration(seconds: 1),
-                          alignment: Alignment(cloud1XAxis, cloud1YAxis),
-                          child: Image.asset(
-                            "assets/images/Clouds.png",
-                            height: MediaQuery.of(context).size.height * 0.2,
-                          ),
-                        ),
-                        AnimatedContainer(
-                          duration: const Duration(seconds: 1),
-                          alignment: Alignment(cloud2XAxis, cloud2YAxis),
-                          child: Image.asset(
-                            "assets/images/Clouds.png",
-                            height: MediaQuery.of(context).size.height * 0.2,
-                          ),
-                        ),
+                        clouds
+                            ? AnimatedContainer(
+                                duration: const Duration(seconds: 1),
+                                alignment: Alignment(cloud1XAxis, cloud1YAxis),
+                                child: Image.asset(
+                                  "assets/images/Clouds.png",
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.2,
+                                ),
+                              )
+                            : Container(),
+                        clouds
+                            ? AnimatedContainer(
+                                duration: const Duration(seconds: 1),
+                                alignment: Alignment(cloud2XAxis, cloud2YAxis),
+                                child: Image.asset(
+                                  "assets/images/Clouds.png",
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.2,
+                                ),
+                              )
+                            : Container(),
                         AnimatedContainer(
                           duration: const Duration(milliseconds: 300),
                           alignment: Alignment(XMarioAxis, YMarioAxis),
@@ -474,73 +484,112 @@ class _HomepageState extends State<Homepage> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            border:
-                                                Border.all(color: Colors.black),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                offset: const Offset(3, 4),
-                                                blurRadius: 0,
-                                                spreadRadius:
-                                                    MediaQuery.of(context)
-                                                            .size
-                                                            .width *
-                                                        0.002,
-                                                color: const Color.fromARGB(
-                                                    255, 0, 0, 0),
-                                              )
-                                            ]),
-                                        child: Padding(
-                                          padding: EdgeInsets.all(
-                                              MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.01),
-                                          child: Text(
-                                            "Option Name",
-                                            style: TextStyle(
-                                                fontFamily: "Pixeboy",
-                                                fontSize: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.035),
+                                      GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            clouds = !clouds;
+                                          });
+                                        },
+                                        child: Container(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.14,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.2,
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              border: Border.all(
+                                                  color: Colors.black),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  offset: const Offset(3, 4),
+                                                  blurRadius: 0,
+                                                  spreadRadius:
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .width *
+                                                          0.002,
+                                                  color: const Color.fromARGB(
+                                                      255, 0, 0, 0),
+                                                )
+                                              ]),
+                                          child: Center(
+                                            child: Padding(
+                                              padding: EdgeInsets.all(
+                                                  MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.01),
+                                              child: FittedBox(
+                                                fit: BoxFit.contain,
+                                                child: Text(
+                                                  "Clouds : ${clouds ? "on" : "off"}",
+                                                  style: TextStyle(
+                                                      fontFamily: "Pixeboy",
+                                                      fontSize:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              0.035),
+                                                ),
+                                              ),
+                                            ),
                                           ),
                                         ),
                                       ),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            border:
-                                                Border.all(color: Colors.black),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                offset: const Offset(3, 4),
-                                                blurRadius: 0,
-                                                spreadRadius:
-                                                    MediaQuery.of(context)
-                                                            .size
-                                                            .width *
-                                                        0.002,
-                                                color: const Color.fromARGB(
-                                                    255, 0, 0, 0),
-                                              )
-                                            ]),
-                                        child: Padding(
-                                          padding: EdgeInsets.all(
-                                              MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.01),
-                                          child: Text(
-                                            "Option Name",
-                                            style: TextStyle(
-                                                fontFamily: "Pixeboy",
-                                                fontSize: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.035),
+                                      GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            Birds = !Birds;
+                                          });
+                                        },
+                                        child: Container(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.14,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.2,
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              border: Border.all(
+                                                  color: Colors.black),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  offset: const Offset(3, 4),
+                                                  blurRadius: 0,
+                                                  spreadRadius:
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .width *
+                                                          0.002,
+                                                  color: const Color.fromARGB(
+                                                      255, 0, 0, 0),
+                                                )
+                                              ]),
+                                          child: Center(
+                                            child: Padding(
+                                              padding: EdgeInsets.all(
+                                                  MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.01),
+                                              child: Text(
+                                                "Birds : ${Birds ? "on" : "off"} ",
+                                                style: TextStyle(
+                                                    fontFamily: "Pixeboy",
+                                                    fontSize:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.035),
+                                              ),
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -550,42 +599,69 @@ class _HomepageState extends State<Homepage> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            border:
-                                                Border.all(color: Colors.black),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                offset: const Offset(3, 4),
-                                                blurRadius: 0,
-                                                spreadRadius:
-                                                    MediaQuery.of(context)
-                                                            .size
-                                                            .width *
-                                                        0.002,
-                                                color: const Color.fromARGB(
-                                                    255, 0, 0, 0),
-                                              )
-                                            ]),
-                                        child: Padding(
-                                          padding: EdgeInsets.all(
-                                              MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.01),
-                                          child: Text(
-                                            "Option Name",
-                                            style: TextStyle(
-                                                fontFamily: "Pixeboy",
-                                                fontSize: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.035),
+                                      GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            Music = !Music;
+                                            Music
+                                                ? _assetsAudioPlayer.play()
+                                                : _assetsAudioPlayer.pause();
+                                          });
+                                        },
+                                        child: Container(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.14,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.2,
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              border: Border.all(
+                                                  color: Colors.black),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  offset: const Offset(3, 4),
+                                                  blurRadius: 0,
+                                                  spreadRadius:
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .width *
+                                                          0.002,
+                                                  color: const Color.fromARGB(
+                                                      255, 0, 0, 0),
+                                                )
+                                              ]),
+                                          child: Center(
+                                            child: Padding(
+                                              padding: EdgeInsets.all(
+                                                  MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.01),
+                                              child: Text(
+                                                "Music : ${Music ? "on" : "off"}",
+                                                style: TextStyle(
+                                                    fontFamily: "Pixeboy",
+                                                    fontSize:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.035),
+                                              ),
+                                            ),
                                           ),
                                         ),
                                       ),
                                       Container(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.14,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.2,
                                         decoration: BoxDecoration(
                                             color: Colors.white,
                                             border:
@@ -603,20 +679,23 @@ class _HomepageState extends State<Homepage> {
                                                     255, 0, 0, 0),
                                               )
                                             ]),
-                                        child: Padding(
-                                          padding: EdgeInsets.all(
-                                              MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.01),
-                                          child: Text(
-                                            "Option Name",
-                                            style: TextStyle(
-                                                fontFamily: "Pixeboy",
-                                                fontSize: MediaQuery.of(context)
+                                        child: Center(
+                                          child: Padding(
+                                            padding: EdgeInsets.all(
+                                                MediaQuery.of(context)
                                                         .size
                                                         .width *
-                                                    0.035),
+                                                    0.01),
+                                            child: Text(
+                                              "Option Name",
+                                              style: TextStyle(
+                                                  fontFamily: "Pixeboy",
+                                                  fontSize:
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .width *
+                                                          0.035),
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -665,7 +744,12 @@ class _HomepageState extends State<Homepage> {
                                                 child: Slider(
                                                   value: Volume,
                                                   onChanged: (value) {
-                                                    Volume = value;
+                                                    setState(() {
+                                                      Volume = value;
+                                                      _assetsAudioPlayer
+                                                          .setVolume(
+                                                              Volume / 100);
+                                                    });
                                                   },
                                                   label: Volume.toString(),
                                                   max: 100,
