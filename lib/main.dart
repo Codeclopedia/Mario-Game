@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/Homepage.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(Phoenix(child: const MyApp()));
   SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
 }
 

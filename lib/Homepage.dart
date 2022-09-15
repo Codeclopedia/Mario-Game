@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -12,12 +13,15 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  double XMarioAxis = 0.0;
+  double XMarioAxis = -0.8;
   double YMarioAxis = 1.0;
   double cloud1XAxis = -0.7;
   double cloud1YAxis = -0.8;
   double cloud2XAxis = 0.7;
   double cloud2YAxis = -0.8;
+  Timer? leftwalktimer;
+  Timer? rightwalktimer;
+
   bool Play = false;
   bool options = false;
   bool clouds = true;
@@ -29,8 +33,8 @@ class _HomepageState extends State<Homepage> {
   late String currentmario;
   int score = 0;
   int time = 0;
-  late Timer timer;
-  late Timer timer2;
+  Timer? timer;
+  Timer? timer2;
   String CurrentIndex = "Play";
   double Volume = 40;
   late AssetsAudioPlayer _assetsAudioPlayer;
@@ -59,9 +63,9 @@ class _HomepageState extends State<Homepage> {
   @override
   void dispose() {
     _assetsAudioPlayer.stop();
-    timer.cancel();
+    timer?.cancel();
     _assetsAudioPlayer.dispose();
-    timer2.cancel();
+    timer2?.cancel();
     super.dispose();
   }
 
@@ -246,18 +250,30 @@ class _HomepageState extends State<Homepage> {
                             child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.4),
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: IconButton(
-                                  onPressed: () {
+                            GestureDetector(
+                              onTapDown: (details) {
+                                leftwalktimer = Timer.periodic(
+                                  const Duration(milliseconds: 100),
+                                  (timer) {
                                     walkleft();
                                   },
-                                  color: Colors.white,
-                                  icon: const Icon(
-                                    Icons.arrow_back,
-                                  )),
+                                );
+                              },
+                              onTapUp: (details) {
+                                leftwalktimer?.cancel();
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(0.4),
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Padding(
+                                  padding: EdgeInsets.all(
+                                      MediaQuery.of(context).size.width *
+                                          0.012),
+                                  child: const Icon(Icons.arrow_back,
+                                      color: Colors.white),
+                                ),
+                              ),
                             ),
                             Container(
                               decoration: BoxDecoration(
@@ -272,18 +288,30 @@ class _HomepageState extends State<Homepage> {
                                     Icons.arrow_upward,
                                   )),
                             ),
-                            Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.4),
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: IconButton(
-                                  onPressed: () {
+                            GestureDetector(
+                              onTapDown: (details) {
+                                rightwalktimer = Timer.periodic(
+                                  const Duration(milliseconds: 100),
+                                  (timer) {
                                     walkright();
                                   },
-                                  color: Colors.white,
-                                  icon: const Icon(
+                                );
+                              },
+                              onTapUp: (details) {
+                                rightwalktimer?.cancel();
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(0.4),
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: const Padding(
+                                  padding: EdgeInsets.all(12.0),
+                                  child: Icon(
                                     Icons.arrow_forward,
-                                  )),
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
                             ),
                           ],
                         )),
@@ -655,46 +683,53 @@ class _HomepageState extends State<Homepage> {
                                           ),
                                         ),
                                       ),
-                                      Container(
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.14,
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.2,
-                                        decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            border:
-                                                Border.all(color: Colors.black),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                offset: const Offset(3, 4),
-                                                blurRadius: 0,
-                                                spreadRadius:
-                                                    MediaQuery.of(context)
-                                                            .size
-                                                            .width *
-                                                        0.002,
-                                                color: const Color.fromARGB(
-                                                    255, 0, 0, 0),
-                                              )
-                                            ]),
-                                        child: Center(
-                                          child: Padding(
-                                            padding: EdgeInsets.all(
-                                                MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.01),
-                                            child: Text(
-                                              "Option Name",
-                                              style: TextStyle(
-                                                  fontFamily: "Pixeboy",
-                                                  fontSize:
+                                      GestureDetector(
+                                        onTap: () {
+                                          Phoenix.rebirth(context);
+                                        },
+                                        child: Container(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.14,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.2,
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              border: Border.all(
+                                                  color: Colors.black),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  offset: const Offset(3, 4),
+                                                  blurRadius: 0,
+                                                  spreadRadius:
                                                       MediaQuery.of(context)
                                                               .size
                                                               .width *
-                                                          0.035),
+                                                          0.002,
+                                                  color: const Color.fromARGB(
+                                                      255, 0, 0, 0),
+                                                )
+                                              ]),
+                                          child: Center(
+                                            child: Padding(
+                                              padding: EdgeInsets.all(
+                                                  MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.01),
+                                              child: Text(
+                                                "Reset",
+                                                style: TextStyle(
+                                                    fontFamily: "Pixeboy",
+                                                    fontSize:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.035),
+                                              ),
                                             ),
                                           ),
                                         ),
