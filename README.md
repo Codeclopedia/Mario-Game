@@ -1,6 +1,8 @@
 # Mario Game Clone
 
-A Mario game project created in flutter with flame or any game builder engine.
+A Mario game project created in flutter without flame or any game builder engine.
+
+The Project use flutter and Getx and other third party flutter packages like flutter_audio_manager , Sharedpreference and etc.
 
 ## Getting Started
 
