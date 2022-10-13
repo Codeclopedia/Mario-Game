@@ -1,6 +1,6 @@
-# flutter_application_1
+# Mario Game Clone
 
-A new Flutter project.
+A Mario game project created in flutter with flame or any game builder engine.
 
 ## Getting Started
 
