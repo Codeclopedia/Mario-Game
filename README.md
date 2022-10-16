@@ -12,7 +12,7 @@ The rough breakdown of the current state of the game will consist of Game Logic,
 
 ## Dependencies:
 
-Further during the timeline, the plan is to improve the frame rate, add a ranking system based on highscore and implement shortest path algorithm for jumps and different new adventure in the game.
+Further during the timeline, the plan is to improve the frame rate, add a ranking system based on highscore and implement shortest path algorithm for jumps and add different new adventure in the game.
 
 A few resources to get you started if this is your first Flutter project:
 
