@@ -20,3 +20,8 @@ Further during the timeline, the plan is to improve the frame rate, add a rankin
   flutter_phoenix: ^1.1.0
   
   
+![Screenshot_2022-10-26-14-41-27-899_com example flutter_application_1](https://user-images.githubusercontent.com/88575762/197987970-33c508cb-d75d-4489-b302-c01ef1e3adaf.jpg)
+![Screenshot_2022-10-26-14-41-38-328_com example flutter_application_1](https://user-images.githubusercontent.com/88575762/197987988-c72f1f6a-4fcd-4620-b2fa-1a587a987069.jpg)
+![Screenshot_2022-10-26-14-41-49-423_com example flutter_application_1](https://user-images.githubusercontent.com/88575762/197988037-05907fef-af68-4b6b-adea-7adb92c1d4ba.jpg)
+![Screenshot_2022-10-26-14-41-52-490_com example flutter_application_1](https://user-images.githubusercontent.com/88575762/197988100-f4e651ca-eb87-412e-904a-2df8b9674f92.jpg)
+![Screenshot_2022-10-26-14-42-58-163_com example flutter_application_1](https://user-images.githubusercontent.com/88575762/197988117-bb6d5d31-b0d0-4790-9047-7eb1e425af74.jpg)
