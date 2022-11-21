@@ -211,7 +211,6 @@ class _HomepageState extends State<Homepage> {
       if (xMarioAxis >= mushroomXAxis - 0.1 &&
           xMarioAxis <= mushroomXAxis + 0.1) {
         setState(() {
-          print("inside");
           onmushroom = true;
         });
       }
@@ -227,275 +226,268 @@ class _HomepageState extends State<Homepage> {
     mushroomheight = MediaQuery.of(context).size.height * 0.125;
     mushroomWidth = MediaQuery.of(context).size.width * 0.05;
 
-    return SafeArea(
-      child: Material(
-        child: Stack(
-          children: [
-            IgnorePointer(
-              ignoring: isplaying ? false : true,
-              child: Column(
-                children: [
-                  Container(
-                    color: Colors.blue,
-                    height: MediaQuery.of(context).size.height * 0.7,
-                    width: double.infinity,
-                    child: Stack(
-                      children: [
-                        clouds
-                            ? Clouds(
-                                cloudXAxis: cloud1XAxis,
-                                cloudYAxis: cloud1YAxis,
-                                changinglocation: changinglocation1,
-                              )
-                            : Container(),
-                        clouds
-                            ? Clouds(
-                                cloudXAxis: cloud2XAxis,
-                                cloudYAxis: cloud2YAxis,
-                                changinglocation: changinglocation2,
-                              )
-                            : Container(),
-                        onmushroom
-                            ? Container()
-                            : Mushroom(
-                                xAxis: mushroomXAxis,
-                                yAxis: mushroomYAxis,
-                                height: mushroomheight,
-                                width: mushroomWidth),
-                        Box(
-                          boxXAxis: boxXAxis,
-                          boxYAxis: boxYAxis,
-                          height: boxheight,
-                          width: boxWidth,
-                        ),
-                        GiftBox(
-                          giftboxXAxis: giftboxXAxis,
-                          giftboxYAxis: giftboxYAxis,
-                          height: giftboxheight,
-                          width: giftboxWidth,
-                        ),
-                        Mario(
-                          marioXAxis: xMarioAxis,
-                          marioYAxis: yMarioAxis,
-                          currentmario: currentmario,
-                          ismariosmall: onmushroom,
-                        )
-                      ],
-                    ),
+    return Material(
+      child: Stack(
+        children: [
+          IgnorePointer(
+            ignoring: isplaying ? false : true,
+            child: Column(
+              children: [
+                Container(
+                  color: Colors.blue,
+                  height: MediaQuery.of(context).size.height * 0.75,
+                  width: double.infinity,
+                  child: Stack(
+                    children: [
+                      clouds
+                          ? Clouds(
+                              cloudXAxis: cloud1XAxis,
+                              cloudYAxis: cloud1YAxis,
+                              changinglocation: changinglocation1,
+                            )
+                          : Container(),
+                      clouds
+                          ? Clouds(
+                              cloudXAxis: cloud2XAxis,
+                              cloudYAxis: cloud2YAxis,
+                              changinglocation: changinglocation2,
+                            )
+                          : Container(),
+                      onmushroom
+                          ? Container()
+                          : Mushroom(
+                              xAxis: mushroomXAxis,
+                              yAxis: mushroomYAxis,
+                              height: mushroomheight,
+                              width: mushroomWidth),
+                      Box(
+                        boxXAxis: boxXAxis,
+                        boxYAxis: boxYAxis,
+                        height: boxheight,
+                        width: boxWidth,
+                      ),
+                      GiftBox(
+                        giftboxXAxis: giftboxXAxis,
+                        giftboxYAxis: giftboxYAxis,
+                        height: giftboxheight,
+                        width: giftboxWidth,
+                      ),
+                      Mario(
+                        marioXAxis: xMarioAxis,
+                        marioYAxis: yMarioAxis,
+                        currentmario: currentmario,
+                        ismariosmall: onmushroom,
+                      )
+                    ],
                   ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: Stack(
-                      children: [
-                        AnimatedContainer(
-                          duration: const Duration(milliseconds: 300),
-                          height: MediaQuery.of(context).size.height * 0.216,
-                          width: double.infinity,
-                          decoration: const BoxDecoration(
-                              image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage("assets/images/Floor.jpg"),
-                          )),
-                          alignment: const Alignment(0, 0),
-                        ),
-                        Center(
-                            child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            GestureDetector(
-                              onTapDown: (details) {
-                                leftwalktimer = Timer.periodic(
-                                  const Duration(milliseconds: 100),
-                                  (timer) {
-                                    collisionWithMushroom();
-                                    if (yMarioAxis >= mushroomYAxis - 0.1 &&
-                                        yMarioAxis <= mushroomYAxis + 0.1) {
-                                      if (xMarioAxis >= boxXAxis - 0.05 &&
-                                          xMarioAxis <= boxXAxis + 0.11) {
-                                        setState(() {
-                                          leftmovementblocked = true;
-                                        });
-                                      } else {
-                                        setState(() {
-                                          leftmovementblocked = false;
-                                        });
-                                      }
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: Stack(
+                    children: [
+                      AnimatedContainer(
+                        duration: const Duration(milliseconds: 300),
+                        height: MediaQuery.of(context).size.height * 0.25,
+                        width: double.infinity,
+                        decoration: const BoxDecoration(
+                            image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage("assets/images/Floor.jpg"),
+                        )),
+                        alignment: const Alignment(0, 0),
+                      ),
+                      Center(
+                          child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          GestureDetector(
+                            onTapDown: (details) {
+                              leftwalktimer = Timer.periodic(
+                                const Duration(milliseconds: 100),
+                                (timer) {
+                                  collisionWithMushroom();
+                                  if (yMarioAxis >= mushroomYAxis - 0.1 &&
+                                      yMarioAxis <= mushroomYAxis + 0.1) {
+                                    if (xMarioAxis >= boxXAxis - 0.05 &&
+                                        xMarioAxis <= boxXAxis + 0.11) {
+                                      setState(() {
+                                        leftmovementblocked = true;
+                                      });
                                     } else {
                                       setState(() {
                                         leftmovementblocked = false;
                                       });
                                     }
+                                  } else {
+                                    setState(() {
+                                      leftmovementblocked = false;
+                                    });
+                                  }
 
-                                    leftmovementblocked ? null : walkleft();
-                                  },
-                                );
-                              },
-                              onTapUp: (details) {
-                                leftwalktimer?.cancel();
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.white.withOpacity(0.4),
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: Padding(
-                                  padding: EdgeInsets.all(
-                                      MediaQuery.of(context).size.width *
-                                          0.012),
-                                  child: const Icon(Icons.arrow_back,
-                                      color: Colors.white),
-                                ),
-                              ),
-                            ),
-                            Container(
+                                  leftmovementblocked ? null : walkleft();
+                                },
+                              );
+                            },
+                            onTapUp: (details) {
+                              leftwalktimer?.cancel();
+                            },
+                            child: Container(
                               decoration: BoxDecoration(
                                   color: Colors.white.withOpacity(0.4),
                                   borderRadius: BorderRadius.circular(10)),
-                              child: IconButton(
-                                  onPressed: () {
-                                    if (giftboxXAxis + giftboxWidth / 2 <
-                                            xMarioAxis &&
-                                        giftboxXAxis - giftboxWidth / 2 >
-                                            xMarioAxis) {
-                                      if (giftboxYAxis + giftboxheight / 2 <
-                                              yMarioAxis &&
-                                          giftboxYAxis - giftboxheight / 2 >
-                                              yMarioAxis) {
-                                        setState(() {
-                                          print("blocked");
-                                          jumpmovementblocked = true;
-                                        });
-                                      }
-                                      {
-                                        setState(() {
-                                          print(" not blocked");
-                                          jumpmovementblocked = false;
-                                        });
-                                      }
+                              child: Padding(
+                                padding: EdgeInsets.all(
+                                    MediaQuery.of(context).size.width * 0.012),
+                                child: const Icon(Icons.arrow_back,
+                                    color: Colors.white),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.4),
+                                borderRadius: BorderRadius.circular(10)),
+                            child: IconButton(
+                                onPressed: () {
+                                  if (giftboxXAxis + giftboxWidth / 2 <
+                                          xMarioAxis &&
+                                      giftboxXAxis - giftboxWidth / 2 >
+                                          xMarioAxis) {
+                                    if (giftboxYAxis + giftboxheight / 2 <
+                                            yMarioAxis &&
+                                        giftboxYAxis - giftboxheight / 2 >
+                                            yMarioAxis) {
+                                      setState(() {
+                                        jumpmovementblocked = true;
+                                      });
                                     }
                                     {
-                                      print("2");
+                                      setState(() {
+                                        jumpmovementblocked = false;
+                                      });
                                     }
-                                    print(jumpmovementblocked);
-                                    jumpmovementblocked ? null : jump();
-                                  },
-                                  color: Colors.white,
-                                  icon: const Icon(
-                                    Icons.arrow_upward,
-                                  )),
-                            ),
-                            GestureDetector(
-                              onTapDown: (details) {
-                                rightwalktimer = Timer.periodic(
-                                  const Duration(milliseconds: 100),
-                                  (timer) {
-                                    collisionWithMushroom();
-                                    if (yMarioAxis >= mushroomYAxis - 0.1 &&
-                                        yMarioAxis <= mushroomYAxis + 0.1) {
-                                      if (xMarioAxis >= boxXAxis - 0.1 &&
-                                          xMarioAxis <= boxXAxis + 0.11) {
-                                        setState(() {
-                                          rightmovementblocked = true;
-                                        });
-                                      } else {
-                                        setState(() {
-                                          rightmovementblocked = false;
-                                        });
-                                      }
+                                  }
+                                  {}
+
+                                  jumpmovementblocked ? null : jump();
+                                },
+                                color: Colors.white,
+                                icon: const Icon(
+                                  Icons.arrow_upward,
+                                )),
+                          ),
+                          GestureDetector(
+                            onTapDown: (details) {
+                              rightwalktimer = Timer.periodic(
+                                const Duration(milliseconds: 100),
+                                (timer) {
+                                  collisionWithMushroom();
+                                  if (yMarioAxis >= mushroomYAxis - 0.1 &&
+                                      yMarioAxis <= mushroomYAxis + 0.1) {
+                                    if (xMarioAxis >= boxXAxis - 0.1 &&
+                                        xMarioAxis <= boxXAxis + 0.11) {
+                                      setState(() {
+                                        rightmovementblocked = true;
+                                      });
                                     } else {
                                       setState(() {
                                         rightmovementblocked = false;
                                       });
                                     }
-                                    rightmovementblocked ? null : walkright();
-                                  },
-                                );
-                              },
-                              onTapUp: (details) {
-                                rightwalktimer?.cancel();
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.white.withOpacity(0.4),
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: const Padding(
-                                  padding: EdgeInsets.all(12.0),
-                                  child: Icon(
-                                    Icons.arrow_forward,
-                                    color: Colors.white,
-                                  ),
+                                  } else {
+                                    setState(() {
+                                      rightmovementblocked = false;
+                                    });
+                                  }
+                                  rightmovementblocked ? null : walkright();
+                                },
+                              );
+                            },
+                            onTapUp: (details) {
+                              rightwalktimer?.cancel();
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.4),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: const Padding(
+                                padding: EdgeInsets.all(12.0),
+                                child: Icon(
+                                  Icons.arrow_forward,
+                                  color: Colors.white,
                                 ),
                               ),
-                            ),
-                          ],
-                        )),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            isplaying
-                ? play()
-                : options
-                    ? option()
-                    : Center(
-                        child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            "assets/images/logo/logo.png",
-                            scale: MediaQuery.of(context).size.width * 0.01,
-                          ),
-                          GestureDetector(
-                            onTap: () async {
-                              await Future.delayed(
-                                  const Duration(microseconds: 600));
-                              setState(() {
-                                isplaying = true;
-                                startmovement();
-                              });
-                            },
-                            child: Text(
-                              "Play",
-                              style: TextStyle(
-                                  fontFamily: "Pixeboy",
-                                  color: Colors.white,
-                                  fontSize:
-                                      MediaQuery.of(context).size.width * 0.05),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                options = true;
-                              });
-                            },
-                            child: Text(
-                              "Options",
-                              style: TextStyle(
-                                  fontFamily: "Pixeboy",
-                                  color: Colors.white,
-                                  fontSize:
-                                      MediaQuery.of(context).size.width * 0.05),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              SystemNavigator.pop();
-                            },
-                            child: Text(
-                              "Exit",
-                              style: TextStyle(
-                                  fontFamily: "Pixeboy",
-                                  color: Colors.white,
-                                  fontSize:
-                                      MediaQuery.of(context).size.width * 0.05),
                             ),
                           ),
                         ],
                       )),
-          ],
-        ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          isplaying
+              ? play()
+              : options
+                  ? option()
+                  : Center(
+                      child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          "assets/images/logo/logo.png",
+                          scale: MediaQuery.of(context).size.width * 0.01,
+                        ),
+                        GestureDetector(
+                          onTap: () async {
+                            await Future.delayed(
+                                const Duration(microseconds: 600));
+                            setState(() {
+                              isplaying = true;
+                              startmovement();
+                            });
+                          },
+                          child: Text(
+                            "Play",
+                            style: TextStyle(
+                                fontFamily: "Pixeboy",
+                                color: Colors.white,
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.05),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              options = true;
+                            });
+                          },
+                          child: Text(
+                            "Options",
+                            style: TextStyle(
+                                fontFamily: "Pixeboy",
+                                color: Colors.white,
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.05),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            SystemNavigator.pop();
+                          },
+                          child: Text(
+                            "Exit",
+                            style: TextStyle(
+                                fontFamily: "Pixeboy",
+                                color: Colors.white,
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.05),
+                          ),
+                        ),
+                      ],
+                    )),
+        ],
       ),
     );
   }

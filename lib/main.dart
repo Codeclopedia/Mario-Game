@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/Homepage.dart';
+import 'package:flutter_application_1/splashscreen.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 void main() {
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Homepage(),
+      home: const SplashScreen(),
     );
   }
 }
